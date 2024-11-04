@@ -1,0 +1,19 @@
+defaults:
+  - _self_
+  - override hydra/launcher:  local
+  - override hydra/output:  local
+
+quadruped_model: "go1"                 # Robot model, "go1" or "a1"
+
+iterations: 5                          # Number of environment generation iterations
+train_iterations: 2000                 # Number of training iterations per generated environment
+render_images: False                   # Render generated environments (doesn't work on some headless servers)
+distill_from: ""                       # Path to the distillation run to use as a teacher
+
+wandb: False                           # Use wandb tracking
+
+resume_run: ""                         # Resume from a previous hydra run
+
+hydra:
+  job:
+    chdir: True

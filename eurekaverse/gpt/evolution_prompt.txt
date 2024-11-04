@@ -1,0 +1,15 @@
+We trained a quadruped policy to perform parkour on the obstacle course created by the generation code above (as well as others), and we tracked the values of individual reward components as well as other metrics such as the number of goals reached (out of 8), episode length, and the rate of edge violations (feet too close to edge of obstacles):
+<INSERT POLICY STATISTICS HERE>
+
+We have also computed statistics for the terrain height of the direct path between goals across multiple difficulties. Note that this is a heuristical shortest-path between goals that approximates the locations an optimal quadruped would traverse. The statistics do not reflect the actual path taken by the quadruped policy, nor does it include the height of gaps, pits, and other obstacles that the quadruped would not step on:
+<INSERT TERRAIN STATISTICS HERE>
+
+Please carefully analyze the statistics above and provide a new, improved generation function. You should pay attention to which parts of the course the quadruped successfully learned and which parts it struggled with. The goal of your course is to balance difficulty and feasibility for the quadruped robot, allowing it to learn and perform better. Thus, if the robot is getting stuck on a certain obstacle or goal, you should consider changing or removing it. You should also follow the guidelines below:
+- If the number of reached goals is over 80%, please create a harder course while ensuring that it's feasible and safe for a real robot. You should consider adding more obstacles, increasing the complexity of the course, and increasing the difficulty of existing obstacles. For example, you can make climbing obstacles taller or jumping gaps wider.
+- If the number of reached goals is below 20%, please create an easier course by decreasing the difficulty of existing obstacles or simplifying the course layout. For example, you can make climbing obstacles shorter or jumping gaps narrower. Please also double-check that the course obstacles are fair and feasible for the quadruped.
+- Otherwise, please create a variation of the current course with the same difficulty but different obstacles. If the quadruped seems stuck on a certain obstacle, please change it.
+
+Again, please be creative when designing your course as we want to provide a diverse set of training environments for the quadruped. Here is a list of the courses and skills that the quadruped was already trained on. You may use them as inspiration, but please make sure yours is different:
+<INSERT TERRAIN DESCRIPTIONS HERE>
+
+Please use the same template for the course generation function and provide a detailed reasoning of the changes you made. The function signature should remain the same.

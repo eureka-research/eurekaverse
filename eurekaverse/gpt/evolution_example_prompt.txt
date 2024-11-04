@@ -1,0 +1,11 @@
+The following is an example of an initial terrain generation function.
+
+```
+<INSERT INITIAL EXAMPLE HERE>
+```
+
+And the following is an example of a new, improved terrain generation function that has more complex obstacles. You can reference the example provided, but please make your terrain different. This example serves to illustrate how terrains can be made more complex, but you should tune the difficulty according to the previous instructions.
+
+```
+<INSERT EVOLUTION EXAMPLE HERE>
+```
