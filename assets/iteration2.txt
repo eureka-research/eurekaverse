@@ -1,0 +1,61 @@
+def set_terrain(length, width, field_resolution, difficulty):
+    """Raised platforms, narrow pathways, and sloping ramps to test the quadruped's agility and balance."""
+    def m_to_idx(m):
+        """Converts meters to quantized indices."""
+        return np.round(m / field_resolution).astype(np.int16) if not (isinstance(m, list) or isinstance(m, tuple)) else [round(i / field_resolution) for i in m]
+
+    height_field = np.zeros((m_to_idx(length), m_to_idx(width)))
+    goals = np.zeros((8, 2))
+
+    # Set up dimensions for platforms, ramps, and gaps
+    platform_length_min = 0.8 - 0.2 * difficulty
+    platform_length_max = 1.2 - 0.2 * difficulty
+    platform_height_min, platform_height_max = 0.1 + 0.3 * difficulty, 0.2 + 0.4 * difficulty
+    gap_length_min = 0.3 + 0.3 * difficulty
+    gap_length_max = 0.5 + 0.3 * difficulty
+
+    platform_length_min, platform_length_max = m_to_idx(platform_length_min), m_to_idx(platform_length_max)
+    gap_length_min, gap_length_max = m_to_idx(gap_length_min), m_to_idx(gap_length_max)
+    platform_width = m_to_idx(0.8)  # Narrower pathways
+    mid_y = m_to_idx(width) // 2
+    spawn_length = m_to_idx(2)
+    
+    def add_platform(start_x, end_x, mid_y, height):
+        half_width = platform_width // 2
+        x1, x2 = start_x, end_x
+        y1, y2 = mid_y - half_width, mid_y + half_width
+        height_field[x1:x2, y1:y2] = height
+
+    def add_ramp(start_x, end_x, mid_y, base_height, peak_height):
+        half_width = platform_width // 2
+        x1, x2 = start_x, end_x
+        y1, y2 = mid_y - half_width, mid_y + half_width
+        ramp_heights = np.linspace(base_height, peak_height, x2 - x1)
+        for i in range(x2 - x1):
+            height_field[x1 + i, y1:y2] = ramp_heights[i]
+
+    # Set spawn area to flat ground and first goal
+    height_field[0:spawn_length, :] = 0
+    goals[0] = [spawn_length - m_to_idx(0.5), mid_y]
+
+    cur_x = spawn_length
+    for i in range(6):  # Set up 6 sections
+        platform_length = np.random.randint(platform_length_min, platform_length_max)
+        platform_height = np.random.uniform(platform_height_min, platform_height_max)
+        add_platform(cur_x, cur_x + platform_length, mid_y, platform_height)
+
+        # Put goal in the center of the platform
+        goals[i + 1] = [cur_x + platform_length // 2, mid_y]
+        cur_x += platform_length
+
+        # Add gap
+        gap_length = np.random.randint(gap_length_min, gap_length_max)
+        height_field[cur_x: cur_x + gap_length, :] = -1.0
+        cur_x += gap_length
+
+    # Final ramp to the ground level before the last goal
+    final_ramp_length = m_to_idx(0.8)
+    add_ramp(cur_x, cur_x + final_ramp_length, mid_y, platform_height, 0)
+    goals[7] = [cur_x + final_ramp_length // 2, mid_y]
+    cur_x += final_ramp_length
+    return height_field, goals

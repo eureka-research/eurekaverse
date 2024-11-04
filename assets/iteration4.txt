@@ -1,0 +1,41 @@
+def set_terrain(length, width, field_resolution, difficulty):
+    """Multiple irregularly shaped platforms and twisting pathways to test robot's adaptability and precision."""
+    def m_to_idx(m):
+        """Converts meters to quantized indices."""
+        return np.round(m / field_resolution).astype(np.int16) if not (isinstance(m, list) or isinstance(m, tuple)) else [round(i / field_resolution) for i in m]
+
+    height_field = np.zeros((m_to_idx(length), m_to_idx(width)))
+    goals = np.zeros((8, 2))
+    platform_length_base = 1.0 - 0.3 * difficulty
+    platform_length = m_to_idx(platform_length_base)
+    platform_height_min, platform_height_max = 0.1 * difficulty, 0.3 * difficulty
+    gap_length = 0.5 - 0.3 * difficulty
+    gap_length = m_to_idx(gap_length)
+    maximum_twist = 0.5 - 0.3 * difficulty    
+    twist_range = m_to_idx([0.0, maximum_twist])
+    mid_y = m_to_idx(width) // 2
+
+    def add_irregular_platform(start_x, end_x, mid_y, direction):
+        x1, x2 = start_x, end_x
+        half_width_1 = np.random.uniform(0.5, 1.5)
+        half_width_2 = max(half_width_1 + np.random.uniform(-0.2, 0.3), 0.4)
+        y1 = mid_y - m_to_idx(half_width_1)
+        y2 = mid_y + m_to_idx(half_width_2)
+        height = np.random.uniform(platform_height_min, platform_height_max)
+        for i in range(x1, x2):
+            row = np.random.choice(range(y1 - direction, y2 + direction), y2 - y1)
+            height_field[i, row] = height
+
+    # Set up initial flat area
+    spawn_length = m_to_idx(2)
+    height_field[0:spawn_length, :] = 0
+    goals[0] = [spawn_length - m_to_idx(0.5), mid_y]
+    current_x = spawn_length
+
+    # Adding irregular platforms
+    for i in range(1, 8):
+        dx = np.random.randint(-twist_range[1], twist_range[1])
+        add_irregular_platform(current_x, current_x + platform_length + dx, mid_y, (-1) ** i)
+        goals[i] = [current_x + (platform_length + dx) // 2, mid_y + dx]  # Goal at mid of irregular platform
+        current_x += platform_length + dx + gap_length
+    return height_field, goals

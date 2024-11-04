@@ -1,0 +1,57 @@
+def set_terrain(length, width, field_resolution, difficulty):
+    """Stepping stones over a water-filled pit for the robot to navigate."""
+    def m_to_idx(m):
+        """Converts meters to quantized indices."""
+        return np.round(m / field_resolution).astype(np.int16) if not (isinstance(m, list) or isinstance(m, tuple)) else [round(i / field_resolution) for i in m]
+
+    height_field = np.zeros((m_to_idx(length), m_to_idx(width)))
+    goals = np.zeros((8, 2))
+
+    # Parameters for stepping stones
+    stone_size_min = 0.4  # minimum side length of stone in meters
+    stone_size_max = 1.0  # maximum side length of stone in meters
+    stone_gap_min = 0.4  # minimum gap between stones in meters
+    stone_gap_max = 1.2  # maximum gap between stones in meters
+    stone_height_min, stone_height_max = 0.1, 0.4  # height variation for stones
+    num_stones = 6
+
+    def add_stepping_stone(center_x, center_y, size, height):
+        half_size = size // 2
+        x1, x2 = center_x - half_size, center_x + half_size
+        y1, y2 = center_y - half_size, center_y + half_size
+        height_field[x1:x2, y1:y2] = height
+
+    mid_y = m_to_idx(width / 2)
+ 
+    # Set spawn area to flat ground
+    spawn_length = m_to_idx(2)
+    height_field[0:spawn_length, :] = 0
+
+    # Place first goal near the spawn
+    goals[0] = [spawn_length - m_to_idx(0.5), mid_y]
+    cur_x = spawn_length
+
+    for i in range(num_stones):
+        # Randomly determine stone size and gap
+        stone_size = random.uniform(stone_size_min, stone_size_max) * (1 + 0.5 * difficulty)
+        stone_size = m_to_idx(stone_size)
+        stone_gap = random.uniform(stone_gap_min, stone_gap_max) * (1 - difficulty)
+        stone_gap = m_to_idx(stone_gap)
+        
+        # Randomly place the stepping stone
+        dx = random.randint(-m_to_idx(0.3), m_to_idx(0.3))
+        dy = random.randint(-m_to_idx(1.0), m_to_idx(1.0))
+        stone_height = random.uniform(stone_height_min, stone_height_max) * difficulty
+        add_stepping_stone(cur_x + stone_gap, mid_y + dy, stone_size, stone_height)
+
+        # Place a goal on each stone
+        goals[i+1] = [cur_x + stone_gap, mid_y + dy]
+
+        # Update next stone position
+        cur_x += stone_gap + stone_size
+
+    # Add final goal at the end of the course
+    final_gap = m_to_idx(1.0)
+    goals[-1] = [cur_x + final_gap, mid_y]
+    height_field[cur_x:, :] = 0
+    return height_field, goals

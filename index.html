@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Eurekaverse | Environment Curriculum Generation via Large Language Models</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="./static/css/academicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <!-- Your custom style for line spacing -->
+    <!-- <style>
+        #answer-1 {
+            line-height: 1;
+            font-size: 1rem;
+            margin-top: 0;
+            margin-bottom: 0;
+            padding: 0; /* This ensures no extra space around the text */
+        }
+    </style> -->
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+
+<body>
+
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-1 publication-title">Eurekaverse: <br>
+                            Environment Curriculum Generation<br>via Large Language Models</h1>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">
+                                <a target="_blank" href="https://willjhliang.github.io/">
+                                    William&#160;Liang</a>
+                                    <a href="mailto:willjhliang@gmail.com">
+                                        <span class="icon">
+                                            <i class="fa fa-envelope"></i>
+                                        </span>
+                                    </a>
+                                    ,
+                                <a target="_blank"
+                                    href="https://www.linkedin.com/in/sam-wang-penn/">Sam&#160;Wang</a>,
+                                <a target="_blank"
+                                    href="https://johnny-wang16.github.io/">Hungju&#160;Wang</a>,
+                                <br>
+                                <a target="_blank"
+                                    href="https://obastani.github.io/">Osbert&#160;Bastani</a>,
+                                <a target="_blank"
+                                    href="https://www.seas.upenn.edu/~dineshj/">Dinesh&#160;Jayaraman<sup>&dagger;</sup></a>,
+                                <a target="_blank" 
+                                    href="https://jasonma2016.github.io/">Yecheng Jason&#160;Ma<sup>&dagger;</sup></a>
+                            </span>
+                        </div>
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">University of Pennsylvania;</span>
+                            <span class="author-block"><sup>&dagger;</sup>Equal Advising</span>  
+                        </div>
+
+                        <!-- <div class="is-size-5 publication-authors">
+                        <span class="author-block">
+                                    <span class="icon">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                            Corresponding authors: TODO
+                        </span>
+                        </div> -->
+
+                        <!-- <div class="is-size-5 publication-authors">
+                        <span class="author-block">Work done during the first author's internship at NVIDIA</span>
+                        </div> -->
+
+                        <div class="is-size-5 publication-authors">
+
+                            <span class="author-block">
+                                        <span class="icon">
+                                            <i class="fa fa-envelope"></i>
+                                        </span>
+                                Corresponding authors: willjhliang@gmail.com
+                            </span>
+                            </div>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">Conference on Robot Learning 2024 <span style="color: red;">(Oral)</span></span>
+                        </div>
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                <!-- TODO REPLACE ALL LINKS -->
+                                <!-- <span class="link-block">
+                                    <a target="_blank" href=""
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="ai ai-arxiv"></i>
+                                        </span>
+                                        <span>arXiv</span>
+                                    </a>
+                                </span> -->
+
+                                <span class="link-block">
+                                    <a target="_blank" href=""
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="ai ai-arxiv"></i>
+                                        </span>
+                                        <span><b>ArXiv (Coming Soon!)</b></span>
+                                    </a>
+                                    <a target="_blank" href="assets/eurekaverse_paper.pdf"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </span>
+                                        <span><b>PDF</b></span>
+                                    </a>
+                                    <a target="_blank" href="https://github.com/eureka-research/eurekaverse"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fab fa-github"></i>
+                                        </span>
+                                        <span><b>Code</b></span>
+                                    </a>
+
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="padding: 0">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <!-- <div class="columns is-centered has-text-centered">
+                <img src="figures/droid_teaser.png" class="interpolation-image" alt=""
+                style="display: block; width: 100%; margin-left: auto; margin-right: auto" />
+            </div> -->
+            <div>
+                <video poster="videos/eurekaverse_trailer.jpg" preload="auto" id="" autoplay controls muted loop width="100%" playbackRate=2.0 style="border-radius: 5px;">
+                    <source src="videos/eurekaverse_trailer.mp4" type="video/mp4">
+                </video>
+                <!-- <br>
+                <br>
+                <br> -->
+                <!-- <div class="columns is-centered has-text-centered">
+                    <h2 class="title is-3">DrEureka 5-Minute Uncut Deployment Video</h2>
+                </div>
+                <br>
+                <br>
+                <div class="columns is-centered has-text-centered">
+
+                <iframe width="950" height="560" src="https://www.youtube.com/embed/kRj3crlFdOU" frameborder="0" allowfullscreen></iframe>
+
+            </div> -->
+
+            </div>
+        </div>
+    </section>
+    <br>
+    <br>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p style="font-size: 125%">
+                            Recent work has demonstrated that a promising strategy for teaching robots a wide range of complex skills is by training them on a curriculum of progressively more challenging environments. However, developing an effective curriculum of environment distributions currently requires significant expertise, which must be repeated for every new domain. Our key insight is that environments are often naturally represented as code. Thus, we probe whether effective environment curriculum design can be achieved and automated via code generation by large language models (LLM). In this paper, we introduce Eurekaverse, an unsupervised environment design algorithm that uses LLMs to sample progressively more challenging, diverse, and learnable environments for skill training. We validate Eurekaverse’s effectiveness in the domain of quadrupedal parkour learning, in which a quadruped robot must traverse through a variety of obstacle courses. The automatic curriculum designed by Eurekaverse enables gradual learning of complex parkour skills in simulation and can successfully transfer to the real-world, outperforming manual training courses designed by humans.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="container is-max-widescreen">
+            <div class="rows">
+                <div class="rows is-centered ">
+                    <div class="row is-full-width">
+                        <h2 class="title is-2"><span class="dvima">Method</span></h2>
+
+                        <!-- <img src="assets/images/eureka.png" class="interpolation-image" alt=""
+                            style="display: block; margin-left: auto; margin-right: auto" />
+                        <br> -->
+                        <div class="columns is-centered has-text-centered">
+                        <video poster="videos/eurekaverse_method.png" id="" autoplay controls muted width="90%" playbackRate=2.0 style="border-radius: 5px;">
+                            <source src="videos/eurekaverse_method.mp4" type="video/mp4">
+                        </video>
+                        </div>
+                        <span style="font-size: 125%">Eurekaverse automatically learns complex skills by performing agent-environment co-evolution, which iterates between evolutionary environment generation and population-based policy training and evaluation.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-widescreen">
+            <div class="rows">
+                <div class="rows is-centered ">
+                    <div class="row is-full-width">
+                        <h2 class="title is-2"><span class="dvima">Experiments</span></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- </section>
+    <section class="section"> -->
+        <br>
+        <div class="container is-max-widescreen">
+            <div class="columns is-centered has-text-centered">
+                <!-- <h2 class="title is-3">DrEureka 5-Minute Uncut Deployment Video</h2> -->
+            </div>
+            <br>
+            <div class="columns is-centered has-text-centered">
+        </div>
+            <div class="rows">
+                <div class="rows is-centered ">
+                    <div class="row is-full-width">
+                        <h2 class="title is-3"><span class="dvima">Obstacle Courses</span></h2>
+                        <p style="font-size: 125%">
+                            In this section, we highlight the exceptional performance of our Eurekaverse policy on real-world parkour courses. Our policy can robustly traverse large gaps, steep ramps, and even a deformable yoga ball.
+                        </p>  
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="hero is-light is-small"> -->
+
+        <div class="container is-max-widescreen">
+            <div class="hero-body">
+                <div class="container video-grid">
+                    <div class="video-item">
+                        <video poster="videos/course/course_1_C0079.jpg" preload="none" autoplay controls muted loop height="100%" playbackRate="2.0">
+                            <source src="videos/course/course_1_C0079_compressed.mp4" type="video/mp4">
+                        </video>
+                        <p class="video-caption">Climbing boxes, crossing a gap, and walking over a yoga ball.</p>
+                    </div>
+                    <div class="video-item">
+                        <video poster="videos/course/course_2_C0194.jpg" preload="none" autoplay controls muted loop height="100%" playbackRate="2.0">
+                            <source src="videos/course/course_2_C0194_compressed.mp4" type="video/mp4">
+                        </video>
+                        <p class="video-caption">Jumping over a 65cm gap with an elevated landing platform.</p>
+                    </div>
+                    <div class="video-item">
+                        <video poster="videos/course/course_3_C0233.jpg" preload="none" autoplay controls muted loop height="100%" playbackRate="2.0">
+                            <source src="videos/course/course_3_C0233_compressed.mp4" type="video/mp4">
+                        </video>
+                        <p class="video-caption">Chaining a triple jump and recovering from a slanted ramp landing.</p>
+                    </div>
+                    <div class="video-item">
+                        <video poster="videos/course/course_4_C0243.jpg" preload="none" autoplay controls muted loop height="100%" playbackRate="2.0">
+                            <source src="videos/course/course_4_C0243_compressed.mp4" type="video/mp4">
+                        </video>
+                        <p class="video-caption">Ignoring fruit distractors and quickly reacting to a dynamically changing course.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <style>
+            .video-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px; /* Adjust spacing between videos */
+            }
+        
+            .video-item {
+                width: 100%;
+                height: 100%;
+                text-align: center;
+            }
+        
+            video {
+                width: 100%;
+                height: auto;
+                border-radius: 8px; /* Optional: rounded corners */
+            }
+
+            .video-caption {
+                margin-top: 8px; /* Adds space above caption */
+                font-size: 1rem; /* Adjusts font size */
+                color: #333; /* Text color */
+            }
+        </style>
+
+        <div class="container is-max-widescreen">
+            <div class="rows">
+                <div class="rows is-centered ">
+                    <div class="row is-full-width">
+                        <h2 class="title is-4"><span class="dvima">Additional Course Highlights</span></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container is-max-widescreen">
+            <div class="hero-body">
+                <div class="container">
+                    <div id="results-carousel" class="carousel results-carousel">
+                        <div class="item">
+                            <video poster="videos/climb/climb_and_gap_1_C0091.png" preload="none" id=""  autoplay muted loop height="100%" playbackRate=2.0>
+                                <source src="videos/climb/climb_and_gap_1_C0091_compressed.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item">
+                            <video poster="videos/climb/climb_and_gap_2_C0093.png" preload="none" id=""  autoplay muted loop height="100%" playbackRate=2.0>
+                                <source src="videos/climb/climb_and_gap_2_C0093_compressed.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item">
+                            <video poster="videos/climb/climb_and_gap_3_C0102.png" id="" autoplay muted loop height="100%" playbackRate=2.0>
+                                <source src="videos/climb/climb_and_gap_3_C0102_compressed.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item">
+                            <video poster="videos/climb/climb_and_ramp_1_C0107.png" preload="none" id=""  autoplay muted loop height="100%" playbackRate=2.0>
+                                <source src="videos/climb/climb_and_ramp_1_C0107_compressed.mp4" type="video/mp4">
+                            </video>
+                        </div>
+
+                        <div class="item">
+                            <video poster="videos/climb/climb_and_ramp_2_C0112.png" preload="none" id=""  autoplay muted loop height="100%" playbackRate=2.0>
+                                <source src="videos/climb/climb_and_ramp_2_C0112_compressed.mp4" type="video/mp4">
+                            </video>
+                        </div>
+
+                        <div class="item">
+                            <video poster="videos/climb/climb_and_ramp_3_C0118.png" preload="none" id=""  autoplay muted loop height="100%" playbackRate=2.0>
+                                <source src="videos/climb/climb_and_ramp_3_C0118_compressed.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container is-max-widescreen">
+            <div class="rows">
+                <div class="rows is-centered ">
+                    <div class="row is-full-width">
+                        <h2 class="title is-4"><span class="dvima">Outdoor Terrains</span></h2>
+                        <!-- <p style="font-size: 125%">
+                        </p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container is-max-widescreen">
+            <div class="hero-body">
+                <div class="container video-grid1by3">
+                    <div class="video-item">
+                        <video poster="videos/realworld/real_balance_C0160.png" preload="none" autoplay muted loop height="100%" playbackRate="2.0">
+                            <source src="videos/realworld/real_balance_C0160_compressed.mp4" type="video/mp4">
+                        </video>
+                        <p class="video-caption">Climbing up and down a narrow path.</p>
+                    </div>
+                    <div class="video-item">
+                        <video poster="videos/realworld/real_climb_1_C0151.png" preload="none" autoplay muted loop height="100%" playbackRate="2.0">
+                            <source src="videos/realworld/real_climb_1_C0151_compressed.mp4" type="video/mp4">
+                        </video>
+                        <p class="video-caption">Hurdling a curb, turning around, and hurdling back.</p>
+                    </div>
+                    <div class="video-item">
+                        <video poster="videos/realworld/real_climb_2_C0174.png" preload="none" autoplay muted loop height="100%" playbackRate="2.0">
+                            <source src="videos/realworld/real_climb_2_C0174_compressed.mp4" type="video/mp4">
+                        </video>
+                        <p class="video-caption">Climbing two large steps of terraced seating.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+        .video-grid1by3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Creates a 1x3 layout */
+            gap: 20px; /* Adjusts spacing between videos */
+        }
+        
+        .video-item {
+            width: 100%;
+            height: 100%;
+        }
+        
+        video {
+            width: 100%;
+            height: auto;
+            border-radius: 8px; /* Optional: rounded corners */
+        }
+        </style>
+
+
+<!-- 
+        <div class="container is-max-widescreen">
+            <div class="hero-body">
+                <div class="container">
+                    <div id="results-carousel" class="carousel results-carousel">
+                        <div class="item">
+                            <video poster="videos/kick/C0020_clip1.png" preload="none" id=""  controls muted loop height="100%" playbackRate=2.0>
+                                <source src="videos/kick/C0020_clip1_compressed.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item">
+                            <video poster="videos/kick/C0021_clip2.png" id="" autoplay controls muted loop height="100%" playbackRate=2.0>
+                                <source src="videos/kick/C0021_clip2_compressed.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item">
+                            <video poster="videos/kick/C0021_clip1.png" preload="none" id=""  controls muted loop height="100%" playbackRate=2.0>
+                                <source src="videos/kick/C0021_clip1_compressed.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item">
+                            <video poster="videos/kick/C0020_clip2.png" preload="none" id=""  controls muted loop height="100%" playbackRate=2.0>
+                                <source src="videos/kick/C0020_clip2_compressed.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <div class="columns is-centered has-text-centered">
+            </div>
+            </div>
+        </div> -->
+
+        <div class="container is-max-widescreen">
+            <div class="rows">
+                <div class="rows is-centered ">
+                    <div class="row is-full-width">
+                        <h2 class="title is-3"><span class="dvima">Quantitative Evaluation</span></h2>
+                        <p style="font-size: 125%">
+                            Across four obstacle types, the Eurekaverse-trained policy significantly outperforms a policy trained on human-designed environments from prior work.
+                        </p>  
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="rows">
+                <div class="rows is-centered ">
+                    <div class="columns">
+                        <div class="columns is-centered has-text-centered">
+                            <video poster="figures/real_world_new.png" id="" autoplay muted loop width="90%" playbackRate=2.0 style="border-radius: 5px;">
+                                <source src="videos/quantitative_result.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+        <br>
+        <br>
+
+        <div class="container is-max-widescreen">
+            <div class="rows">
+                <div class="rows is-centered ">
+                    <div class="row is-full-width">
+                        <h2 class="title is-3"><span class="dvima">Generated Terrains</span></h2>
+                        <p style="font-size: 125%">
+                            Eurekaverse generates a diverse set of terrains for parkour learning in simulation. Each iteration of generation increases difficulty and complexity, forming an adaptive curriculum for effective training. Below the renders, we also show examples of the generated terrain code.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+
+
+            <div class="columns" style="align-items: flex-start;">
+                <!-- Column for toggle button and iteration buttons -->
+                <div class="column is-one-fifth" style="display: flex; flex-direction: column; align-items: flex-start;">
+                    <div style="height: 20px;"></div> <!-- Adjust height as needed for more or less spacing -->
+                    <div style="margin-bottom: 20px;">
+                        <img id="toggleButtonImage" src="videos/sim/static_cam.png" alt="Toggle Camera" style="width: 195px; cursor: pointer;" onclick="toggleCamera()">
+                    </div>
+
+                    <!-- Spacer to create empty space between the toggle button and iteration buttons -->
+                    <div style="height: 168px;"></div> <!-- Adjust height as needed for more or less spacing -->
+
+                    <!-- Iteration buttons -->
+                    <div class="iteration-buttons">
+                        <img src="videos/sim/iteration_1_button.png" width="100%" style="border-radius: 5px;" alt="Terrains generated at iteration 1" onclick="showVideoAndCode(1);">
+                        <img src="videos/sim/iteration_2_button.png" width="100%" style="border-radius: 5px;" alt="Terrains generated at iteration 2" onclick="showVideoAndCode(2);">
+                        <img src="videos/sim/iteration_3_button.png" width="100%" style="border-radius: 5px;" alt="Terrains generated at iteration 3" onclick="showVideoAndCode(3);">
+                        <img src="videos/sim/iteration_4_button.png" width="100%" style="border-radius: 5px;" alt="Terrains generated at iteration 4" onclick="showVideoAndCode(4);">
+                        <img src="videos/sim/iteration_5_button.png" width="100%" style="border-radius: 5px;" alt="Terrains generated at iteration 5" onclick="showVideoAndCode(5);">
+                    </div>
+                </div>
+
+                <!-- Column for video placeholder -->
+                <div class="column is-four-fifths" style="padding: 12px;">
+                    <div id="videoDisplaySection" style="margin-top: 20px;">
+                        <!-- Placeholder image that appears when no video is selected -->
+                        <img id="placeholderImage" src="videos/placeholder.png" width="100%" style="border-radius: 5px; display: block;">
+
+                        <!-- Video element that will be shown when an iteration button is clicked -->
+                        <video id="iterationVideo" width="100%" style="border-radius: 5px; display: none;" autoplay muted loop controls>
+                            <source id="iterationVideoSource" src="" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+            <!-- Toggle button to switch between dynamic and static camera -->
+
+            <!-- <div style="position: relative;">
+                <button id="toggleCameraButton" onclick="toggleCamera()">
+                    <img id="toggleButtonImage" src="dynamic_cam.png" alt="Toggle Camera" style="width: 195px;">
+                </button>
+            </div>
+            <div class="columns" style="align-items: end;">
+                <div class="column is-one-fifths">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <img src="videos/tasks/iteration_1_button.png" width="100%" style="border-radius: 5px;" alt="Terrains generated at iteration 1" onclick="showVideoAndCode(1);">
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <img src="videos/tasks/iteration_2_button.png" width="100%" style="border-radius: 5px;" alt="Terrains generated at iteration 2" onclick="showVideoAndCode(2);">
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <img src="videos/tasks/iteration_3_button.png" width="100%" style="border-radius: 5px;" alt="Terrains generated at iteration 3" onclick="showVideoAndCode(3);">
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <img src="videos/tasks/iteration_4_button.png" width="100%" style="border-radius: 5px;" alt="Terrains generated at iteration 4" onclick="showVideoAndCode(4);">
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <img src="videos/tasks/iteration_5_button.png" width="100%" style="border-radius: 5px;" alt="Terrains generated at iteration 5" onclick="showVideoAndCode(5);">
+                    </div>
+                </div>
+            
+                <div class="column is-four-fifths" style="padding: 12px;">
+                    <div id="videoDisplaySection" style="margin-top: 20px;">
+                        <img id="placeholderImage" src="videos/placeholder.png" width="100%" style="border-radius: 5px; display: block;">
+
+                        <video id="iterationVideo" width="100%" style="border-radius: 5px; display: none;" autoplay muted loop controls>
+                            <source id="iterationVideoSource" src="" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div> -->
+            <!-- Video display section -->
+
+            <div class="col-md-6">
+                <!-- <div id="imgtext-1" style="font-size: 1.5em">Select an iteration above:</div> -->
+                <div>
+                    <pre class="p-1"><code class="language-python" id="answer-1">Eurekaverse generated terrain code.</code></pre>
+                    <!-- <pre class="p-1"><code class="language-python" id="answer-2"></code></pre> -->
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+
+        <div class="container is-max-widescreen">
+            <div class="rows">
+                <div class="rows is-centered ">
+                    <div class="row is-full-width">
+                        <h2 class="title is-3"><span class="dvima">Simulation Evaluation</span></h2>
+                        <p style="font-size: 125%">
+                           In our simulated parkour benchmark, the Eurekaverse policy outperforms a Human-Designed baseline from prior work. The latter learns quickly but plateaus, whereas Ours continuously improves and nears the performance of an Oracle trained on the testing terrains.
+                        </p>  
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="columns is-centered has-text-centered">
+                <img src="figures/main_comparison_half.png" alt="Comparison Image" width="50%" style="border-radius: 5px;">
+            </div>
+            <br>
+        </div>
+    </div>
+        <div class="container is-max-widescreen">
+            <div class="rows">
+                <div class="rows is-centered ">
+                    <div class="row is-full-width">
+                        <h2 class="title is-4"><span class="dvima">Benchmark Visualization</span></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="container is-max-desktop">
+            <div>
+                <video poster="videos/sim/benchmark.jpg" preload="auto" id="" autoplay controls muted loop width="100%" playbackRate=2.0 style="border-radius: 5px;">
+                    <source src="videos/sim/benchmark.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="container is-max-widescreen">
+            <div class="rows">
+                <div class="rows is-centered ">
+                    <div class="row is-full-width">
+                        <h2 class="title is-3"><span class="dvima">Failures and Limitations</span></h2>
+                        <p style="font-size: 125%">
+                            Below are some failure cases of our policy. There are many ways to further improve performance. For instance, our sim-to-real transfer still leaves a noticeable gap between simulated and real-world behavior. Additionally, future work can incorporate visual feedback during environment generation, potentially improving spatial reasoning and environment diversity.
+                        </p>  
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container is-max-widescreen">
+            <div class="hero-body">
+                <div class="container">
+                    <div id="results-carousel" class="carousel results-carousel">
+                        <div class="item">
+                            <video poster="videos/failures/C0101_compressed.jpg" preload="none" id="" autoplay muted loop height="100%" playbackRate=2.0>
+                                <source src="videos/failures/C0101_compressed.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item">
+                            <video poster="videos/failures/C0131_compressed.jpg" preload="none" id=""  autoplay muted loop height="100%" playbackRate=2.0>
+                                <source src="videos/failures/C0131_compressed.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item">
+                            <video poster="videos/failures/C0229_compressed.jpg" preload="none" id="" autoplay muted loop height="100%" playbackRate=2.0>
+                                <source src="videos/failures/C0229_compressed.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item">
+                            <video poster="videos/failures/C0231_compressed.jpg" preload="none" id="" autoplay muted loop height="100%" playbackRate=2.0>
+                                <source src="videos/failures/C0231_compressed.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+
+<section class="section" id="BibTeX">
+    <div class="container is-max-widescreen content">
+        <h2 class="title">BibTeX</h2>
+        <pre><code>@inproceedings{liang2024eurekaverse,
+            title     = {Environment Curriculum Generation via Large Language Models},
+            author    = {William Liang and Sam Wang and Hung-Ju Wang and Osbert Bastani and Dinesh Jayaraman and Yecheng Jason Ma},
+            year      = {2024},
+            booktitle = {Conference on Robot Learning (CoRL)},
+}
+</code></pre>
+    </div>
+</section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column">
+                    <div class="content has-text-centered">
+                        <p>
+                            Website template borrowed from <a
+                                href="https://github.com/nerfies/nerfies.github.io">NeRFies</a>
+                                and <a href="https://eureka-research.github.io/">Eureka</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+<script>
+
+    // timeoutIds = [];
+    var timeoutIds = [];
+
+    function clearExistingTypeWriters() {
+        timeoutIds.forEach(timeoutId => clearTimeout(timeoutId));
+        timeoutIds = [];
+    }
+
+    // function typeWriter(txt, i, elementId) {
+    //     var element = document.getElementById(elementId);
+    //     if (i < txt.length) {
+    //         if (txt.charAt(i) == '\\') {
+    //             element.innerHTML += "<br>";
+    //         } else {
+    //             element.innerHTML += txt.charAt(i);
+    //         }
+    //         var timeoutId = setTimeout(() => typeWriter(txt, i + 1, elementId), 1);
+    //         timeoutIds.push(timeoutId);
+    //     }  else {
+    //     // Apply syntax highlighting once the full text has been written
+    //     hljs.highlightElement(element);
+    //     }
+    // }
+
+    function typeWriter(txt, i, elementId) {
+        let element = document.getElementById(elementId);
+        if (i < txt.length) {
+            if (txt.charAt(i) === '\\') {
+                element.innerHTML += "<br>";
+            } else {
+                element.innerHTML += txt.charAt(i);
+            }
+            let timeoutId = setTimeout(() => typeWriter(txt, i + 1, elementId), 1);
+            timeoutIds.push(timeoutId);
+        } else {
+            hljs.highlightElement(element);
+        }
+    }
+
+
+    // function populateDemo(imgs, num) {
+    //     clearExistingTypeWriters();  // Clear any ongoing typewriter effects
+
+    //     // Clear previous text content
+    //     document.getElementById("answer-1").innerHTML = "";
+    //     document.getElementById("answer-2").innerHTML = "";
+    //     // Get the expanded image
+    //     var expandImg = document.getElementById("expandedImg-" + (num+1));
+    //     var expandImgSim = document.getElementById("expandedImg-" + (num));
+    //     // Get the image text
+    //     var imgText = document.getElementById("imgtext-" + num);
+    //     var answer = document.getElementById("answer-" + num);
+
+    //     // Use the same src in the expanded image as the image being clicked on from the grid
+    //     expandImg.src = imgs.src.replace(".png", ".mp4");
+    //     expandImgSim.src = imgs.src.split(".png")[0] + "_sim.mp4";
+    //     var videoReal = document.getElementById('demo-video-' + num);
+    //     // or video = $('.video-selector')[0];
+    //     videoReal.pause()
+    //     videoReal.load();
+    //     videoReal.play();
+    //     videoReal.removeAttribute('controls');
+
+    //     var videoSim = document.getElementById('demo-video-2');
+    //     // or video = $('.video-selector')[0];
+    //     videoSim.pause()
+    //     videoSim.load();
+    //     videoSim.play();
+    //     videoSim.removeAttribute('controls');
+
+
+    //     console.log(expandImg.src);
+    //     // Use the value of the alt attribute of the clickable image as text inside the expanded image
+    //     var qa = imgs.alt.split("[sep]");
+    //     imgText.innerHTML = qa[0];
+    //     answer.innerHTML = "";
+    //     // Show the container element (hidden with CSS)
+    //     expandImg.parentElement.style.display = "block";
+    //     for (timeoutId of timeoutIds) {
+    //         clearTimeout(timeoutId);
+    //     }
+
+    //     // NOTE (wliang): Modified from original to read from file instead
+    //     console.log("Fetching text from qa:", qa);
+    //     console.log("Fetching text from 1:", qa[1]);
+    //     console.log("Fetching text from 2:", qa[2]);
+
+    //     fetch(qa[1])
+    //         .then(response => response.text())
+    //         .then(contents => {
+    //             // Call the processData function and pass the contents as an argument
+    //             // typeWriter(contents, 0, qa[0], num);
+    //             typeWriter(contents, 0, "answer-1");
+
+    //         })
+    //         .catch(error => console.error('Error reading file:', error));
+
+    //     fetch(qa[2])
+    //         .then(response => response.text())
+    //         .then(contents => {
+    //             // typeWriter(contents,  0, qa[0], num);
+    //             typeWriter(contents, 0, "answer-2");
+
+    //         })
+    //         .catch(error => console.error('Error fetching the second text file:', error));
+    // }
+
+
+    
+
+    function populateDemo(iteration) {
+        clearExistingTypeWriters();
+
+        // Clear previous text content
+        document.getElementById("answer-1").innerHTML = "";
+
+        // Set title text based on iteration
+        // let imgText = document.getElementById("imgtext-1");
+        // imgText.innerHTML = `Terrains generated at iteration ${iteration}`;
+
+        // Fetch text content and display it with the typewriter effect
+        let filePath = `assets/iteration${iteration}.txt`; // Change file path as needed
+        fetch(filePath)
+            .then(response => response.text())
+            .then(contents => {
+                typeWriter(contents, 0, "answer-1"); // Displaying contents in the answer-1 element
+            })
+            .catch(error => console.error('Error fetching text file:', error));
+    }
+
+    // function populateDemo2(imgs, num) {
+    //     clearExistingTypeWriters();  // Clear any ongoing typewriter effects
+
+    //     // Clear previous text content
+    //     document.getElementById("answer-1").innerHTML = "";
+    //     document.getElementById("answer-2").innerHTML = "";
+        
+    //     // Get the expanded image elements
+    //     var expandImg = document.getElementById("expandedImg-" + (num + 1));
+    //     var expandImgSim = document.getElementById("expandedImg-" + num);
+        
+    //     // Set the new image source based on the clicked image
+    //     expandImg.src = imgs.src.replace("button.png", "sim.png");  // e.g., "iteration_1_button.png" -> "iteration_1.png"
+    //     expandImgSim.src = imgs.src.replace("button.png", "sim.png");  // e.g., "iteration_1_button.png" -> "iteration_1_sim.png"
+
+    //     // Update the caption text and clear answer content
+    //     var imgText = document.getElementById("imgtext-" + num);
+    //     var answer = document.getElementById("answer-" + num);
+
+    //     var qa = imgs.alt.split("[sep]");
+    //     imgText.innerHTML = qa[0];
+    //     answer.innerHTML = "";
+
+    //     // Show the container element
+    //     expandImg.parentElement.style.display = "block";
+
+    //     // Fetch and display text content for answer sections with typewriter effect
+    //     fetch(qa[1])
+    //         .then(response => response.text())
+    //         .then(contents => {
+    //             typeWriter(contents, 0, "answer-1");
+    //         })
+    //         .catch(error => console.error('Error reading file:', error));
+
+    //     fetch(qa[2])
+    //         .then(response => response.text())
+    //         .then(contents => {
+    //             typeWriter(contents, 0, "answer-2");
+    //         })
+    //         .catch(error => console.error('Error fetching the second text file:', error));
+    // }
+
+    // function typeWriter(txt, i, q, num) {
+    //     var imgText = document.getElementById("imgtext-" + num);
+    //     var answer = document.getElementById("answer-" + num);
+    //     if (imgText.innerHTML == q) {
+    //         for (let k = 0; k < 5; k++) {
+    //             if (i < txt.length) {
+    //                 if (txt.charAt(i) == "\\") {
+    //                     answer.innerHTML += "\n";
+    //                     i += 1;
+    //                 } else {
+    //                     answer.innerHTML += txt.charAt(i);
+    //                 }
+    //                 i++;
+    //             }
+    //         }
+    //         hljs.highlightAll();
+    //         timeoutIds.push(setTimeout(typeWriter, 1, txt, i, q, num));
+    //     }
+    // }
+
+    // function typeWriter(txt, i, elementId) {
+    //     var element = document.getElementById(elementId);
+    //     if (i < txt.length) {
+    //         if (txt.charAt(i) == '\\') {
+    //             element.innerHTML += "<br>"; // Use <br> for HTML line breaks
+    //         } else {
+    //             element.innerHTML += txt.charAt(i);
+    //         }
+    //         setTimeout(() => typeWriter(txt, i + 1, elementId), 1); // Adjust typewriter speed here
+    //     }
+    // }
+    let cameraMode = 'dynamic';
+
+    function toggleCamera() {
+            // Switch between dynamic and static camera videos
+            cameraMode = cameraMode === 'dynamic' ? 'static' : 'dynamic';
+
+            document.getElementById('toggleButtonImage').src = cameraMode === 'dynamic' ? 'videos/sim/static_cam.png' : 'videos/sim/dynamic_cam.png';
+
+            // If a video is currently displayed, update its source based on the new camera mode
+            const currentIteration = document.getElementById('iterationVideo').dataset.currentIteration;
+            if (currentIteration) {
+                showVideoAndCode(currentIteration, false);
+            }
+        }
+
+        // function showVideo(iteration) {
+        //     // Update the video based on the current camera mode and iteration
+        //     const videoElement = document.getElementById('iterationVideo');
+        //     const videoSource = document.getElementById('iterationVideoSource');
+
+        //     videoSource.src = `videos/tasks/iteration_${iteration}_${cameraMode}.mp4`;
+        //     videoElement.dataset.currentIteration = iteration; // Store current iteration for toggling
+        //     videoElement.load(); // Reload video with updated source
+        // }
+
+
+    function showVideoAndCode(iteration, showCode = true) {
+        // Update the video based on the current camera mode and iteration
+        const videoElement = document.getElementById('iterationVideo');
+        const videoSource = document.getElementById('iterationVideoSource');
+        const placeholderImage = document.getElementById('placeholderImage');
+
+        // Set the video source and load the new video
+        videoSource.src = `videos/sim/eurekaverse_iter_${iteration}_${cameraMode}.mp4`;
+        videoElement.dataset.currentIteration = iteration; // Store current iteration for toggling
+        videoElement.load(); // Reload video with updated source
+
+        // Hide the placeholder image and show the video
+        placeholderImage.style.display = 'none';
+        videoElement.style.display = 'block';
+
+        if (showCode) {
+            populateDemo(iteration);
+        }
+
+    }
+
+</script>
+
+</html>
