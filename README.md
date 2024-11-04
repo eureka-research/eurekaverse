@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[[Website]](https://eureka-research.github.io/eureka-verse/)
+[[Website]](https://eureka-research.github.io/eurekaverse/)
 [[arXiv (Coming Soon!)]]()
 [[PDF]](https://eureka-research.github.io/eurekaverse/assets/eurekaverse_paper.pdf)
 
@@ -13,7 +13,7 @@ University of Pennsylvania
 
 [![Python Version](https://img.shields.io/badge/Python-3.8-blue.svg)](https://github.com/eureka-research/Eurekaverse)
 [<img src="https://img.shields.io/badge/Framework-PyTorch-red.svg"/>](https://pytorch.org/)
-[![GitHub license](https://img.shields.io/github/license/eureka-research/Eurekaverse)](https://github.com/eureka-research/Eurekaverse/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/eureka-research/eurekaverse)](https://github.com/eureka-research/Eurekaverse/blob/main/LICENSE)
 
 ______________________________________________________________________
 
