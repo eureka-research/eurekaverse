@@ -3,7 +3,7 @@
 <div align="center">
 
 [[Website]](https://eureka-research.github.io/eurekaverse/)
-[[arXiv (Coming Soon!)]]()
+[[arXiv]](https://arxiv.org/abs/2411.01775)
 [[PDF]](https://eureka-research.github.io/eurekaverse/assets/eurekaverse_paper.pdf)
 
 [William Liang](https://willjhliang.github.io), [Sam Wang](https://www.linkedin.com/in/sam-wang-penn), [Hung-Ju Wang](https://www.linkedin.com/in/hungju-wang),<br>
