@@ -6,7 +6,7 @@
 [[arXiv]](https://arxiv.org/abs/2411.01775)
 [[PDF]](https://eureka-research.github.io/eurekaverse/assets/eurekaverse_paper.pdf)
 
-[William Liang](https://willjhliang.github.io), [Sam Wang](https://www.linkedin.com/in/sam-wang-penn), [Hung-Ju Wang](https://www.linkedin.com/in/hungju-wang),<br>
+[William Liang](https://willjhliang.github.io), [Sam Wang](https://samuelwang23.github.io/), [Hung-Ju Wang](https://www.linkedin.com/in/hungju-wang),<br>
 [Osbert Bastani](https://obastani.github.io/), [Dinesh Jayaraman<sup>†</sup>](https://www.seas.upenn.edu/~dineshj/), [Yecheng Jason Ma<sup>†</sup>](https://jasonma2016.github.io/)
 
 University of Pennsylvania
@@ -65,7 +65,7 @@ The following instructions will install everything under one Conda environment. 
     ```
 
 # Usage
-1. First, set your OpenAI API key via:
+1. Set your OpenAI API key via:
     ```
     export OPENAI_API_KEY=<YOUR_KEY>
     ```
@@ -75,18 +75,33 @@ The following instructions will install everything under one Conda environment. 
     export LD_LIBRARY_PATH=~/anaconda3/envs/eurekaverse/lib:$LD_LIBRARY_PATH
     ```
 
-3. Now, we are ready to begin environment curriculum generation. Review the configuration in `eurekaverse/eurekaverse/config/config.yaml`. The current parameters were used for our experiments. To run generation:
+3. First, train a walking policy. This will be the initial policy for Eurekaverse.
     ```
-    cd eurekaverse
+    cd extreme-parkour/legged_gym/legged_gym/scripts
+    python train.py --exptid walk_pretrain --max_iterations 1000 --terrain_type simple
+    ```
+
+4. Now, we are ready to begin environment curriculum generation and training. Review the configuration in `eurekaverse/eurekaverse/config/config.yaml`. The current parameters were used for our experiments. To run generation:
+    ```
+    cd ../../../../eurekaverse
     python run_eurekaverse.py
     ```
     The outputs will be saved in `eurekaverse/outputs/run_eurekaverse/<RUN_ID>`.
 
-4. Afterwards, distill the final policy via:
+5. Afterwards, distill the final policy via:
     ```
     python distill_eurekaverse.py <YOUR_RUN_ID>
     ```
     Similarly, the outputs will be saved in `eurekaverse/outputs/distill_eurekaverse/<RUN_ID>`.
+
+## Visualization
+To visualize a trained policy, run:
+```
+cd extreme-parkour/legged_gym/legged_gym/scripts
+python evaluate.py --exptid <EXPTID> --terrain_type benchmark --terrain_rows 3 --terrain_cols 20
+```
+
+You can use a mouse to move the camera and `[` or `]` to switch between different agents.
 
 # Deployment
 Our deployment infrastructure on the Unitree Go1 uses LCM for low-level commands and Docker to run the policy. Note that our Docker is only tested on the Jetson Xavier NX on the Go1. Our setup is loosely based on [LucidSim](https://github.com/lucidsim/lucidsim) and [Walk These Ways](https://github.com/Improbable-AI/walk-these-ways).

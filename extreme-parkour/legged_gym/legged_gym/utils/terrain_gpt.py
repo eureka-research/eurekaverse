@@ -13,19 +13,14 @@ from legged_gym.utils.helpers import set_seed
 # This is the standard set_terrain
 from legged_gym import LEGGED_GYM_ROOT_DIR
 from legged_gym.utils.set_terrain import set_terrain as set_terrain
-from legged_gym.utils.set_terrain_demo import set_terrain as set_terrain_demo
 from legged_gym.utils.set_terrain_benchmark import set_terrain as set_terrain_benchmark
 from legged_gym.utils.set_terrain_original import set_terrain as set_terrain_original
 from legged_gym.utils.set_terrain_original_distill import set_terrain as set_terrain_original_distill
-from legged_gym.utils.set_terrain_presets import set_terrain as set_terrain_presets
 from legged_gym.utils.set_terrain_simple import set_terrain as set_terrain_simple
-from legged_gym.utils.set_terrain_platforms import set_terrain as set_terrain_platforms
 from legged_gym.utils.set_terrain_random import set_terrain as set_terrain_random
-from legged_gym.utils.set_terrain_real import set_terrain as set_terrain_real
 
 # Override default set_terrain.py with a custom path
 set_terrain_override = None
-# set_terrain_override = "/home/exx/Projects/eurekaverse/eurekaverse/outputs/eurekaverse/2024-05-26_22-32-38/terrain_iter-4_run-3.py"
 
 def load_terrain_function_from_file(filepath):
     spec = importlib.util.spec_from_file_location("module_name", filepath)
@@ -145,29 +140,18 @@ class Terrain:
             fix_desc = fix_terrain(terrain)
             if self.cfg.check_feasibility:
                 check_terrain_feasibility(terrain, allow_flat_terrain=(difficulty == 0))
-        elif self.cfg.type == "demo":
-            set_idx = set_terrain_demo(terrain, variation, difficulty)
         elif self.cfg.type == "benchmark":
             set_idx = set_terrain_benchmark(terrain, variation, difficulty)
         elif self.cfg.type == "original":
             set_idx = set_terrain_original(terrain, variation, difficulty)
         elif self.cfg.type == "original_distill":
             set_idx = set_terrain_original_distill(terrain, variation, difficulty)
-        elif self.cfg.type == "presets":
-            set_idx = set_terrain_presets(terrain, variation, difficulty)
         elif self.cfg.type == "simple":
             set_idx = set_terrain_simple(terrain, variation, difficulty)
-        elif self.cfg.type == "platforms":
-            set_idx = set_terrain_platforms(terrain, variation, difficulty)
         elif self.cfg.type == "random":
             set_idx = set_terrain_random(terrain, variation, difficulty)
-        elif self.cfg.type == "real":
-            set_idx = set_terrain_real(terrain, variation, difficulty)
         else:
-            if self.cfg.type == "test":
-                filepath = f"{LEGGED_GYM_ROOT_DIR}/legged_gym/utils/set_terrain_test.py"
-            else:
-                filepath = f"{LEGGED_GYM_ROOT_DIR}/legged_gym/utils/set_terrains/set_terrain_{self.cfg.type}.py"
+            filepath = f"{LEGGED_GYM_ROOT_DIR}/legged_gym/utils/set_terrains/set_terrain_{self.cfg.type}.py"
             if not os.path.exists(filepath):
                 raise ValueError(f"Terrain type {self.cfg.type} not recognized!")
             set_terrain_fn = load_terrain_function_from_file(filepath)

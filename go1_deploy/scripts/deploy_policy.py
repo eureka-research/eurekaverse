@@ -1,8 +1,5 @@
 from pathlib import Path
 
-# import lcm
-# lc = lcm.LCM("udpm://239.255.76.67:7667?ttl=255")
-
 import pickle
 import numpy as np
 

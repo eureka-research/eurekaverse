@@ -48,60 +48,7 @@ class HardwareVisionNN(nn.Module):
     def forward(self, obs, depth_latent):
         obs[:, self.num_prop+self.num_scan : self.num_prop+self.num_scan+self.num_priv_explicit] = self.estimator(obs[:, :self.num_prop])
         return self.actor(obs, hist_encoding=True, eval=False, scandots_latent=depth_latent)
-        # return obs, depth_latent
 
-# This is based on DepthOnlyFCBackbone58x87 and RecurrentDepthBackbone
-# class DepthEncoder(nn.Module):
-#     def __init__(self) -> None:
-#         super().__init__()
-#         activation = nn.ELU()
-#         last_activation = nn.Tanh()
-        
-#         self.base_backbone = nn.Module()
-#         self.base_backbone.image_compression = nn.Sequential(
-#             # [1, 58, 87] (1 frame in by default)
-#             nn.Conv2d(in_channels=1, out_channels=32, kernel_size=5),
-#             # [32, 54, 83]
-#             nn.MaxPool2d(kernel_size=2, stride=2),
-#             # [32, 27, 41]
-#             activation,
-#             nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3),
-#             activation,
-#             nn.Flatten(),
-#             # [32, 25, 39]
-#             nn.Linear(64 * 25 * 39, 128),
-#             activation,
-#             # should be scandots_output_dim in second spot
-#             nn.Linear(128, 32)
-#         )
-    
-#         self.combination_mlp = nn.Sequential(
-#                                     nn.Linear(32+48, 128),
-#                                     activation,
-#                                     nn.Linear(128, 32)
-#                                 )
-#         self.rnn = nn.GRU(input_size=32, hidden_size=512, batch_first=True)
-#         self.output_mlp = nn.Sequential(
-#                                 nn.Linear(512, 32+2),
-#                                 last_activation
-#                             )
-#         # Changed from None to zeros (what GRU makes it if the arg is null)
-#         # Middle dimension corresponds to the batch size
-#         self.hidden_states = torch.zeros(1, 1, 512)
-
-#     def forward(self, depth_image, proprioception):
-#         depth_image = self.base_backbone.image_compression(depth_image.unsqueeze(1))
-#         depth_image = self.base_backbone.output_activation(depth_image)
-#         depth_latent = self.combination_mlp(torch.cat((depth_image, proprioception), dim=-1))
-        
-#         depth_latent, self.hidden_states = self.rnn(depth_latent[:, None, :], self.hidden_states)
-#         depth_latent = self.output_mlp(depth_latent.squeeze(1))
-        
-#         return depth_latent
-
-#     # Should this be removed for jit compilation?
-#     def detach_hidden_states(self):
-#         self.hidden_states = self.hidden_states.detach().clone()
 
 def save_jit(args):    
     load_dir = Path(LEGGED_GYM_ROOT_DIR) / "logs" / args.proj_name / args.exptid

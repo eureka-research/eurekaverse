@@ -134,7 +134,7 @@ def parallel_run(cfg, it, parallel_run_id):
     copy_terrain(terrain_filename, f"{output_dir}/terrain_iter-{it}_run-{parallel_run_id}.py")
 
     # Get the exptid of the run to resume from
-    load_exptid = f"{run_id}_{it-1}_{resume_run_id}" if it > 0 else "flat_action-d0_spd-08"
+    load_exptid = f"{run_id}_{it-1}_{resume_run_id}" if it > 0 else "walk_pretrain"
     exptid = f"{run_id}_{it}_{parallel_run_id}"
 
     # Start evaluation (training terrain before training) process
