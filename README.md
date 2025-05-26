@@ -19,14 +19,9 @@ ______________________________________________________________________
 
 </div>
 
+https://github.com/user-attachments/assets/c197081e-90ce-4d70-9ac9-b656d7ea630f
 
-
-https://github.com/user-attachments/assets/4448bd61-ba12-4ac3-bc29-76576931e475
-
-https://github.com/user-attachments/assets/10e3981c-1d5c-4bb4-a305-72abaf9bc1ae
-
-
-
+https://github.com/user-attachments/assets/e682cf81-bffd-428f-a13d-c3bb903823dc
 
 Recent work has demonstrated that a promising strategy for teaching robots a wide range of complex skills is by training them on a curriculum of progressively more challenging environments. However, developing an effective curriculum of environment distributions currently requires significant expertise, which must be repeated for every new domain. Our key insight is that environments are often naturally represented as code. Thus, we probe whether effective environment curriculum design can be achieved and automated via code generation by large language models (LLM). In this paper, we introduce Eurekaverse, an unsupervised environment design algorithm that uses LLMs to sample progressively more challenging, diverse, and learnable environments for skill training. We validate Eurekaverse's effectiveness in the domain of quadrupedal parkour learning, in which a quadruped robot must traverse through a variety of obstacle courses. The automatic curriculum designed by Eurekaverse enables gradual learning of complex parkour skills in simulation and can successfully transfer to the real-world, outperforming manual training courses designed by humans.
 
